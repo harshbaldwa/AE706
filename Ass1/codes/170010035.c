@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+
+// initial-condition # 1
 void case1(double *array) {
     for (int i=0; i<101; i++) {
         if (i<21) {
@@ -14,6 +16,7 @@ void case1(double *array) {
     }
 }
 
+// initial-condition # 2
 void case2(double *array) {
     for (int i=0; i<101; i++) {
         if (i<5) {
@@ -26,6 +29,7 @@ void case2(double *array) {
     }
 }
 
+// initial-condition # 3
 void case3(double *array) {
     for (int i=0; i<101; i++) {
         if (i<5) {
@@ -38,6 +42,7 @@ void case3(double *array) {
     }
 }
 
+// initial-condition # 4
 void case4(double *array) {
     for (int i=0; i<101; i++) {
         if (i<5) {
@@ -50,6 +55,7 @@ void case4(double *array) {
     }
 }
 
+// FTFS Solver at any instant T
 void FTFS(double *initialCondArr, int T, double mu, FILE *fPtr, int caseNo) {
     double nextArr[101];
 
@@ -76,6 +82,7 @@ void FTFS(double *initialCondArr, int T, double mu, FILE *fPtr, int caseNo) {
     fclose(fPtr);
 }
 
+// FTCS Solver at any instant T
 void FTCS(double *initialCondArr, int T, double mu, FILE *fPtr, int caseNo) {
     double nextArr[101];
 
@@ -104,6 +111,7 @@ void FTCS(double *initialCondArr, int T, double mu, FILE *fPtr, int caseNo) {
     fclose(fPtr);
 }
 
+// FTBS Solver at any instant T
 void FTBS(double *initialCondArr, int T, double mu, FILE *fPtr, int caseNo) {
     double nextArr[101];
 
@@ -130,6 +138,7 @@ void FTBS(double *initialCondArr, int T, double mu, FILE *fPtr, int caseNo) {
     fclose(fPtr);
 }
 
+// LW Solver at any instant T
 void LW(double *initialCondArr, int T, double mu, FILE *fPtr, int caseNo) {
     double nextArr[101];
 
@@ -159,6 +168,7 @@ void LW(double *initialCondArr, int T, double mu, FILE *fPtr, int caseNo) {
     fclose(fPtr);
 }
 
+// BW Solver at any instant T
 void BW(double *initialCondArr, int T, double mu, FILE *fPtr, int caseNo) {
     double nextArr[101];
 
@@ -190,6 +200,7 @@ void BW(double *initialCondArr, int T, double mu, FILE *fPtr, int caseNo) {
     fclose(fPtr);
 }
 
+// FR Solver at any instant T
 void FR(double *initialCondArr, int T, double mu, FILE *fPtr, int caseNo) {
     double nextArrBW[101];
     double nextArrLW[101];
@@ -225,6 +236,7 @@ void FR(double *initialCondArr, int T, double mu, FILE *fPtr, int caseNo) {
     fclose(fPtr);
 }
 
+// FTFS Solver for 100 timesteps
 void FTFSComplete(double *initialCondArr, double mu, FILE *fPtr, int caseNo) {
     double nextArr[101];
     double complete[100][101];
@@ -258,6 +270,7 @@ void FTFSComplete(double *initialCondArr, double mu, FILE *fPtr, int caseNo) {
     fclose(fPtr);
 }
 
+// FTCS Solver for 100 timesteps
 void FTCSComplete(double *initialCondArr, double mu, FILE *fPtr, int caseNo) {
     double nextArr[101];
     double complete[100][101];
@@ -293,6 +306,7 @@ void FTCSComplete(double *initialCondArr, double mu, FILE *fPtr, int caseNo) {
     fclose(fPtr);
 }
 
+// FTBS Solver for 100 timesteps
 void FTBSComplete(double *initialCondArr, double mu, FILE *fPtr, int caseNo) {
     double nextArr[101];
     double complete[100][101];
@@ -326,6 +340,7 @@ void FTBSComplete(double *initialCondArr, double mu, FILE *fPtr, int caseNo) {
     fclose(fPtr);
 }
 
+// LW Solver for 100 timesteps
 void LWComplete(double *initialCondArr, double mu, FILE *fPtr, int caseNo) {
     double nextArr[101];
     double complete[100][101];
@@ -362,6 +377,7 @@ void LWComplete(double *initialCondArr, double mu, FILE *fPtr, int caseNo) {
     fclose(fPtr);
 }
 
+// BW Solver for 100 timesteps
 void BWComplete(double *initialCondArr, double mu, FILE *fPtr, int caseNo) {
     double nextArr[101];
     double complete[100][101];
@@ -400,6 +416,7 @@ void BWComplete(double *initialCondArr, double mu, FILE *fPtr, int caseNo) {
     fclose(fPtr);
 }
 
+// FR Solver for 100 timesteps
 void FRComplete(double *initialCondArr, double mu, FILE *fPtr, int caseNo) {
     double nextArrBW[101];
     double nextArrLW[101];
@@ -442,6 +459,7 @@ void FRComplete(double *initialCondArr, double mu, FILE *fPtr, int caseNo) {
     fclose(fPtr);
 }
 
+// Main Function
 int main(int argc, char *argv[]) {
 
     FILE * fPtr;
@@ -449,12 +467,11 @@ int main(int argc, char *argv[]) {
     int caseNo = atoi(argv[1]);
     int muSelector = atoi(argv[2]);
     int method = atoi(argv[3]);
+    int type_solution = atoi(argv[4]);
+
     double mu;
     bool valid = true;
     char cont;
-
-    // printf("Please select initial conditions from following options: \n 1. Case-1 \n 2. Case-2 \n 3. Case-3 \n 4. Case-4\n");
-    // scanf("%d", &caseNo);
 
     switch(caseNo) {
         case 1: 
@@ -475,9 +492,6 @@ int main(int argc, char *argv[]) {
             break;
     }
 
-    // printf("Select mu: \n 1. 0.5 \n 2. 1.0 \n 3. 1.5\n");
-    // scanf("%d",&muSelector);
-
     switch(muSelector) {
         case 1: 
             mu = 0.5;
@@ -494,47 +508,54 @@ int main(int argc, char *argv[]) {
             break;
     }
 
-    // printf("Select a Method: \n 1. FTFS \n 2. FTCS \n 3. FTBS \n 4. LW \n 5. BW \n 6. FR\n");
-    // scanf("%d", &method);
-
     switch(method) {
-        case 1: 
-            // FTFS(initialCondArr, 40, mu, fPtr, caseNo);
-            FTFSComplete(initialCondArr, mu, fPtr, caseNo);
+        case 1:
+            if (type_solution == 0) {
+                FTFS(initialCondArr, 40, mu, fPtr, caseNo);
+            } else {
+                FTFSComplete(initialCondArr, mu, fPtr, caseNo);
+            }
             break;
         case 2:
-            // FTCS(initialCondArr, 40, mu, fPtr, caseNo);
-            FTCSComplete(initialCondArr, mu, fPtr, caseNo);
+            if (type_solution == 0) {
+                FTCS(initialCondArr, 40, mu, fPtr, caseNo);
+            } else {
+                FTCSComplete(initialCondArr, mu, fPtr, caseNo);
+            }
             break;
         case 3:
-            // FTBS(initialCondArr, 40, mu, fPtr, caseNo);
-            FTBSComplete(initialCondArr, mu, fPtr, caseNo);
+            if (type_solution == 0) {
+                FTBS(initialCondArr, 40, mu, fPtr, caseNo);
+            } else {
+                FTBSComplete(initialCondArr, mu, fPtr, caseNo);
+            }
             break;
         case 4:
-            // LW(initialCondArr, 40, mu, fPtr, caseNo);
-            LWComplete(initialCondArr, mu, fPtr, caseNo);
+            if (type_solution == 0) {
+                LW(initialCondArr, 40, mu, fPtr, caseNo);
+            } else {
+                LWComplete(initialCondArr, mu, fPtr, caseNo);
+            }
             break;
         case 5:
-            // BW(initialCondArr, 40, mu, fPtr, caseNo);
-            BWComplete(initialCondArr, mu, fPtr, caseNo);
+            if (type_solution == 0) {
+                BW(initialCondArr, 40, mu, fPtr, caseNo);
+            } else {
+                BWComplete(initialCondArr, mu, fPtr, caseNo);
+            }
             break;
         case 6:
-            // FR(initialCondArr, 40, mu, fPtr, caseNo);
-            FRComplete(initialCondArr, mu, fPtr, caseNo);
+            if (type_solution == 0) {
+                FR(initialCondArr, 40, mu, fPtr, caseNo);
+            } else {
+                FRComplete(initialCondArr, mu, fPtr, caseNo);
+            }
             break;
         default:
             printf("Sorry, Invalid!");
             valid = false;
             break;
     }
-
-    // printf("File saved in working directory\n");
-    // scanf(" %c", &cont);
-
-    // if (cont == 'n') {
-    //     valid = false;
-    //     break;
-    // }
 
     return 0;
 }
