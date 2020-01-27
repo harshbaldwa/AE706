@@ -45,9 +45,11 @@ def update(num):
         line.set_ydata(ampOut[num])
     return lines
 
+# print(name)
+
 line_ani = animation.FuncAnimation(fig, update, 99,
                                    interval=50, blit=True)
 
 plt.title(name)
-# plt.show()
-line_ani.save('../animations/'+name+'.mp4')
+plt.show()
+# line_ani.save('../animations/'+name+'.mp4')
