@@ -49,4 +49,5 @@ line_ani = animation.FuncAnimation(fig, update, 99,
                                    interval=50, blit=True)
 
 plt.title(name)
-plt.show()
+# plt.show()
+line_ani.save('../animations/'+name+'.mp4')
