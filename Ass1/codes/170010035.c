@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
-#include <stdbool.h>
 #include <stdlib.h>
 
 
@@ -462,15 +461,15 @@ void FRComplete(double *initialCondArr, double mu, FILE *fPtr, int caseNo) {
 // Main Function
 int main(int argc, char *argv[]) {
 
-    FILE * fPtr;
-    double initialCondArr[101];
-    int caseNo = atoi(argv[1]);
-    int muSelector = atoi(argv[2]);
-    int method = atoi(argv[3]);
-    int type_solution = atoi(argv[4]);
+    FILE * fPtr;                            //file pointer
+    double initialCondArr[101];             //initial condition
+    int caseNo = atoi(argv[1]);             //initial condition # 
+    int muSelector = atoi(argv[2]);         //value of mu selector
+    int method = atoi(argv[3]);             //differential scheme
+    int type_solution = atoi(argv[4]);      //full or solution @ t=T
+    int timestep = atoi(argv[5]);           //time instant T
 
     double mu;
-    bool valid = true;
     char cont;
 
     switch(caseNo) {
@@ -488,7 +487,6 @@ int main(int argc, char *argv[]) {
             break;
         default:
             printf("Sorry, Invalid!");
-            valid = false;
             break;
     }
 
@@ -504,56 +502,54 @@ int main(int argc, char *argv[]) {
             break;
         default:
             printf("Sorry, Invalid!");
-            valid = false;
             break;
     }
 
     switch(method) {
         case 1:
-            if (type_solution == 0) {
-                FTFS(initialCondArr, 40, mu, fPtr, caseNo);
-            } else {
+            if (type_solution == 1) {
+                FTFS(initialCondArr, timestep, mu, fPtr, caseNo);
+            } else if (type_solution == 2) {
                 FTFSComplete(initialCondArr, mu, fPtr, caseNo);
             }
             break;
         case 2:
-            if (type_solution == 0) {
-                FTCS(initialCondArr, 40, mu, fPtr, caseNo);
-            } else {
+            if (type_solution == 1) {
+                FTCS(initialCondArr, timestep, mu, fPtr, caseNo);
+            } else if (type_solution == 2) {
                 FTCSComplete(initialCondArr, mu, fPtr, caseNo);
             }
             break;
         case 3:
-            if (type_solution == 0) {
-                FTBS(initialCondArr, 40, mu, fPtr, caseNo);
-            } else {
+            if (type_solution == 1) {
+                FTBS(initialCondArr, timestep, mu, fPtr, caseNo);
+            } else if (type_solution == 2) {
                 FTBSComplete(initialCondArr, mu, fPtr, caseNo);
             }
             break;
         case 4:
-            if (type_solution == 0) {
-                LW(initialCondArr, 40, mu, fPtr, caseNo);
-            } else {
+            if (type_solution == 2) {
+                LW(initialCondArr, timestep, mu, fPtr, caseNo);
+            } else if (type_solution == 2) {
                 LWComplete(initialCondArr, mu, fPtr, caseNo);
             }
             break;
         case 5:
-            if (type_solution == 0) {
-                BW(initialCondArr, 40, mu, fPtr, caseNo);
-            } else {
+            if (type_solution == 1) {
+                BW(initialCondArr, timestep, mu, fPtr, caseNo);
+            } else if (type_solution == 2) {
                 BWComplete(initialCondArr, mu, fPtr, caseNo);
             }
             break;
         case 6:
-            if (type_solution == 0) {
-                FR(initialCondArr, 40, mu, fPtr, caseNo);
-            } else {
+            if (type_solution == 1) {
+                FR(initialCondArr, timestep, mu, fPtr, caseNo);
+            } else if (type_solution == 2) {
                 FRComplete(initialCondArr, mu, fPtr, caseNo);
             }
             break;
         default:
             printf("Sorry, Invalid!");
-            valid = false;
             break;
     }
 

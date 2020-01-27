@@ -24,7 +24,7 @@ def init():
 
 name = ''
 
-with open('out.csv') as csv_file:
+with open('file.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     count = 0
     for row in csv_reader:
@@ -45,11 +45,8 @@ def update(num):
         line.set_ydata(ampOut[num])
     return lines
 
-print(name + ' animation started!')
-
 line_ani = animation.FuncAnimation(fig, update, 99,
                                    interval=50, blit=True)
 
-line_ani.save('animations/' + name + '.mp4')
-
-print(name + ' animation done!')
+plt.title(name)
+plt.show()
