@@ -1,0 +1,4 @@
+- Number of steps
+    - For PJ, we are using all the previous iteration values, so it is taking the longest. 
+    - For PGS, we keep updating the values and hence it takes less time than PJ.
+    - For PSOR, we predict in which direction, temperature will grow and hence it is the fastest.
