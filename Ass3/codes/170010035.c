@@ -3,19 +3,23 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+// Find the maximum of two numbers
 double max (double a, double b) {
     return (a > b) ? a : b;
 }
 
+// Structure for the U matrix
 struct uMatrix {
     double u[3][103];
 };
 
+// Structure for the F matrices
 struct fMatrices {
     double fPlus[3][103];
     double fMinus[3][103];
 };
 
+// Sets the initial conditions as per the question given
 struct uMatrix initialConditions() {
     struct uMatrix u;
 
@@ -46,6 +50,7 @@ struct uMatrix initialConditions() {
     return u;
 }
 
+// Calculating the timestep as per the current conditions
 double timeStep (struct uMatrix u) {
     double lambda = 0;
     double dx = 0.01;
@@ -63,6 +68,7 @@ double timeStep (struct uMatrix u) {
     return cflNumber*dx/lambda;
 }
 
+// Calculating the F matrices as per the Mach Number
 struct fMatrices calculateFMatrices(struct uMatrix u) {
     struct fMatrices f;
     double gamma = 1.4;
@@ -112,6 +118,7 @@ struct fMatrices calculateFMatrices(struct uMatrix u) {
     return f;
 }
 
+// updating the U matrix
 struct uMatrix iteration (struct uMatrix u, double dt) {
     struct uMatrix uNPlus;
     double dx = 0.01;
@@ -132,6 +139,7 @@ struct uMatrix iteration (struct uMatrix u, double dt) {
     return uNPlus;
 }
 
+// Loop
 void solution () {
     struct uMatrix u = initialConditions();
     double time = 0;
@@ -150,9 +158,7 @@ void solution () {
         count += 1;
     }
 
-    // dt = timeStep(u);
-    // uNPlus = iteration(u, dt);
-
+    // saving the data in a csv file and used this data to plot using python
     fptr = fopen("data.csv", "w");
     double x = 0;
     double pressure = 0;
@@ -175,3 +181,4 @@ int main () {
     solution();
     return 0; 
 }
+
