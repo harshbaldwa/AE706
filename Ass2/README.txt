@@ -10,7 +10,7 @@ After this, following results would be obtained.
     ./final.sh 2
 
 - For finding the optimum solution, use this command
-    .final.sh 3
+    ./final.sh 3
 
 - For plotting the midlines results, use this command
     - For PJ, use
