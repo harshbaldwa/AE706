@@ -27,5 +27,3 @@ After this, following results would be obtained.
         ./final.sh 5 2
     - For PSOR, use
         ./final.sh 5 3
-
-For any clarification, please contact me @ +91-7742895101
