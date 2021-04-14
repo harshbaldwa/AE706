@@ -10,5 +10,3 @@ For running the shell script, first type this in the command terminal
     - To plot the comparison with the analytical solution, 
 
 	./plot.sh 2
-
-For any clarification, please contact me @ +91-7742895101
