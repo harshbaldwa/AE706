@@ -40,5 +40,3 @@ So here are some examples for this:
             ./main 4 3 5 2 0 && python3 animations.py
 
 CAUTION: Please enter 5th argument as 0 when solving for complete solution
-
-For any clarification, please contact me @ +91-7742895101
